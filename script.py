@@ -104,11 +104,14 @@ data[['title_tags', 'links', 'file_title', 'people_tag']] = data.apply(
 data['tags'] = data['tags'] + ',' + data['title_tags']
 data.drop(['title_tags'], axis=1, inplace=True)
 
+# Replace textual nan by np.nan
+data['tags'].replace('nan,', np.nan, inplace=True)
 
 ###############
 
-data.to_csv(PROCESSED_DATA_PATH, sep=',')
+data.to_csv(PROCESSED_DATA_PATH, sep=',', index=False)
 print('Processed data stored : ', PROCESSED_DATA_PATH)
 
 
 ###############
+
